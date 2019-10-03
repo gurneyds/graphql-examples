@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GraphQL Basic example</title>
+    <style>
+      pre {
+        border: 1px solid;
+      }
+      input {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      button {
+        margin-right: 10px;
+      }
+      div {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>GraphQL Basic Example</h1>
+    <div>
+      <button class="get-books">Get Books</button>ID:<input type="text" class="id"></input>Title:<input type="text" class="title"></input>Author:<input type="text" class="author"></input>
+    </div>
+    <div>
+      <button class="add-book">Add Book</button>Title:<input type="text" class="title"></input>Author:<input type="text" class="author"></input>
+    </div>
+    <div>
+      <button class="delete-book">Delete Book</button>ID:<input type="text" class="delete-book-id"></input>
+    </div>
+    <div>
+      <button class="update-book">Update Book</button>ID:<input type="text" class="id"></input>Title:<input type="text" class="title"></input>Author:<input type="text" class="author"></input>
+    </div>
+
+    <h2>Output</h2>
+    <pre>
+
+    </pre>
+  </body>
+
+  <script>
+    window.onload = () => {
+      document.body.addEventListener('click', async evt => {
+        if(evt.target.classList.contains('delete-book')) {
+          const bookId = document.body.querySelector('.delete-book-id').value;
+
+          // This demonstrates passing in parameters directly into the query
+          // This is the data that will be posted to the graphQL server
+          const data = {
+            variables: {},
+            query: `mutation {\n  deleteBook(params: ${bookId}) {\n    id\n    title\n    author\n  }\n}\n`
+          }
+
+          const responseData = await postData(data);
+          showOutput(responseData);
+        } else if(evt.target.classList.contains('add-book')) {
+          let userData = gatherUserProvidedData(evt.target.parentElement)
+
+          // This demonstrates passing in parameters via variables
+          const data = {
+            variables: userData,
+            query: `mutation ($title: String, $author: String) {
+                      addBook(params: {title: $title, author: $author}) {
+                        id
+                        title
+                        author
+                      }
+                    }`
+          }
+
+          const responseData = await postData(data);
+          showOutput(responseData);
+        } else if(evt.target.classList.contains('update-book')) {
+          let userData = gatherUserProvidedData(evt.target.parentElement)
+
+          // This demonstrates passing in parameters via variables
+          const data = {
+            variables: userData,
+            query: `mutation ($id: ID, $title: String, $author: String) {
+                      updateBook(params: {id: $id, title: $title, author: $author}) {
+                        id
+                        title
+                        author
+                      }
+                    }`
+          }
+
+          const responseData = await postData(data);
+          showOutput(responseData);
+        } else if(evt.target.classList.contains('get-books')) {
+          let userData = gatherUserProvidedData(evt.target.parentElement)
+
+          const data = {
+            variables: userData,
+            query: `query ($id: ID, $title: String, $author: String) {
+              getBooks(params: {id: $id, title: $title, author: $author}) {
+                id
+                title
+                author
+              }
+            }`
+          };
+
+          const responseData = await postData(data);
+          showOutput(responseData);
+        }
+      });
+    }
+
+    // Helper function to gather the information provided by the user
+    function gatherUserProvidedData(parent) {
+      let userData = {};
+
+      // Collect the user provided data by selecting the fields under the target parent
+      ['id', 'title', 'author'].forEach(field => {
+        const input = parent.querySelector(`.${field}`)
+
+        if (input) {
+          userData[field] = input.value ? input.value : '';
+        }
+      })
+
+      return userData;
+    }
+
+    // Post the data to the graphQL server.
+    async function postData(data, url = 'http://localhost:4000') {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      return await response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    // Show the response data to the user
+    function showOutput(data) {
+      const output = document.body.querySelector('pre');
+
+      // Clear out any old output
+      while(output.firstChild) {
+        output.firstChild.remove();
+      }
+
+      output.innerHTML = JSON.stringify(data, null, 2);
+    }
+  </script>
+</html>

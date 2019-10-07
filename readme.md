@@ -37,10 +37,18 @@ This will return the string 'Hello World'
 
 Each index file below is a stand-alone example to introduce a concept. For each test stop the server and restart using the new index file.
 
-### [index2-getBooks.js](docs/index2.md) demonstrates a graphQL query to get books from a simulated back-end data provider.
+### [index2-getBooks.js](docs/index2.md)
 
-### [index3-addBooks.js](docs/index3.md) demonstrates a mutation query to add a book.
+Demonstrates a graphQL query to get books from a simulated back-end data provider.
 
-### [index4-updateDeleteBooks.js](docs/index4.md) demonstrates mutation queries to delete and update a book
+### [index3-addBooks.js](docs/index3.md)
 
-### [Basic Client](docs/clientBasic.md) - A simple html page that demonstrates how to call the GraphQL server from the front-end.
+Demonstrates a mutation query to add a book.
+
+### [index4-updateDeleteBooks.js](docs/index4.md)
+
+Demonstrates mutation queries to delete and update a book
+
+### [Basic Client](docs/clientBasic.md)
+
+A simple html page that demonstrates how to call the GraphQL server from the front-end.

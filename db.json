@@ -33,6 +33,12 @@
       "name": "Michael Crichton",
       "biography": "Michael Crichton is best know for his book...",
       "birthday": "23 October 1942"
+    },
+    {
+      "id": 99,
+      "name": "Dave",
+      "biography": "Works hard for Family Search",
+      "birthday": "1 April 1970"
     }
   ]
 }

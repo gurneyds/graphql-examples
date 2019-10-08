@@ -78,8 +78,8 @@ const resolvers = {
     },
   },
   Book: {
-    author: (parent, args, context) => {
-      return context.dataSources.authorService.getAuthorName(parent.authorId)
+    author: (book, _, context) => {
+      return context.dataSources.authorService.getAuthorName(book.authorId)
     },
   },
 }

@@ -1,0 +1,96 @@
+// Simple queries that can be used with the code
+{
+  getBooks {
+    id
+    title
+    author
+  }
+}
+
+mutation {
+  addBook(params: {title: "My updated book", author:"David"}) {
+    id
+    title
+    author
+  }
+}
+
+mutation {
+  updateBook(params: {id: "XVDF9sl", title: "My update title"}) {
+    id
+    title
+    author
+  }
+}
+
+mutation {
+  deleteBook(params: "1")
+}
+
+// Queries using variables rather than baked into the query
+
+mutation AddBook($title: String, $author: String) {
+  addBook(params: {title: $title, author: $author}) {
+    id
+    title
+    author
+  }
+}
+
+// With variables
+{
+  "title": "My title4",
+  "author": "Me2"
+}
+
+mutation UpdateBook($id: ID, $title: String, $author: String) {
+  updateBook(params: {id:$id, title:$title, author:$author}) {
+    id
+    title
+    author
+  }
+}
+
+// With variables
+{
+  "id": "_ExS9Qd",
+  "title": "My Title4",
+  "author": "Me5"
+}
+
+mutation AddAuthor($name: String, $biography: String, $birthday: String) {
+  addAuthor(params: {name:$name, biography: $biography, birthday: $birthday}) {
+    id
+    name
+    biography
+    birthday
+  }
+}
+
+// With variables
+{
+  "name": "John",
+  "biography": "Works for Family Search",
+  "birthday": "1 March 1975"
+}
+
+mutation UpdateAuthor($id:ID!, $name: String, $biography: String, $birthday: String) {
+  updateAuthor(params: {id: $id, name:$name, biography: $biography, birthday: $birthday}) {
+    id
+    name
+    biography
+    birthday
+  }
+}
+
+// With variables
+{
+  "id": "99",
+  "name": "Dave",
+  "biography": "Works hard for Family Search",
+  "birthday": "1 April 1970"
+}
+
+mutation DeleteAuthor {
+  deleteAuthor(params: "79")
+}

@@ -45,7 +45,7 @@ const typeDefs = gql`
   type Mutation {
     addBook(params: BookInput): Book!
     updateBook(params: BookInput): Book! # Update an existing book, return the updated book
-    deleteBook(params: ID!): Book! # Delete a book by ID, return the deleted book
+    deleteBook(params: ID!): ID! # Delete a book by ID, return the id
   }
 `
 
@@ -62,6 +62,7 @@ const resolvers = {
       if (index >= 0) {
         return books.splice(index, 1)[0]
       }
+      return id
     },
     updateBook: (_, { params: bookInput }) => {
       const book = books.find(book => book.id === bookInput.id)

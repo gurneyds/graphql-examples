@@ -1,0 +1,38 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Harry Potter and the Sorcers Stone",
+      "authorId": "65"
+    },
+    {
+      "id": "2",
+      "title": "Harry Potter and the Chamber of Secrets",
+      "authorId": 65
+    },
+    {
+      "id": "3",
+      "title": "Jurassic Park",
+      "authorId": 77
+    },
+    {
+      "id": "4",
+      "title": "Airframe",
+      "authorId": 77
+    }
+  ],
+  "authors": [
+    {
+      "id": 65,
+      "name": "J.K. Rowling",
+      "biography": "J.K. Rowling has been working on books most of her life...",
+      "birthday": "31 July 1965"
+    },
+    {
+      "id": 77,
+      "name": "Michael Crichton",
+      "biography": "Michael Crichton is best know for his book...",
+      "birthday": "23 October 1942"
+    }
+  ]
+}

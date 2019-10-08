@@ -27,14 +27,32 @@ function getAuthors(authorInput) {
   return returnedAuthors
 }
 
-function addAuthor(authorInput) {
-  const author = {
-    id: new Date().getTime().toString(),
-    name: authorInput.name,
-    biography: authorInput.biography,
-    birthday: authorInput.birthday,
+function addUpdateAuthor(authorInput) {
+  // Check to see if the author already exists
+  let author = authors.find(author => {
+    if (authorInput.id) {
+      return author.id === authorInput.id1
+    } else if (authorInput.name) {
+      return author.name === authorInput.name
+    }
+  })
+
+  if (author) {
+    // Copy the input fields to the author
+    author = Object.assign(author, authorInput)
+  } else {
+    // Create a brand new author
+    author = {
+      id: new Date().getTime().toString(),
+      name: authorInput.name,
+      biography: authorInput.biography,
+      birthday: authorInput.birthday,
+    }
+
+    // Add to the list of authors
+    authors.push(author)
   }
-  authors.push(author)
+
   return author
 }
 
@@ -47,7 +65,7 @@ function getAuthorName(authorId) {
 }
 
 module.exports = {
-  addAuthor,
+  addUpdateAuthor,
   getAuthors,
   getAuthorById,
   getAuthorName,

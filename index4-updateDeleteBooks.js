@@ -54,7 +54,6 @@ const resolvers = {
     addBook: (_, { params: bookInput }) => {
       // Generate a random id and add the book to the collection
       bookInput.id = new Date().getTime().toString()
-      console.log('bookInput=>', bookInput)
       books.push(bookInput)
       return bookInput
     },

@@ -50,13 +50,12 @@ const resolvers = {
       return dataSources.authorService.addAuthor(authorInput)
     },
     addBook: (_, { params: bookInput }, { dataSources }) => {
-      // Create a new author - ideally we would check for an existing author first - but for simlicity just creating a new author
-      const newAuthor = dataSources.authorService.addAuthor({
+      const author = dataSources.authorService.addUpdateAuthor({
         name: bookInput.author,
       })
 
       // Put the newly created author's id into the book input so it will be there when the book is created1
-      bookInput.authorId = newAuthor.id
+      bookInput.authorId = author.id
       return dataSources.bookService.addBook(bookInput)
     },
     deleteBook: (_, { params: id }, { dataSources }) => {

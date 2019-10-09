@@ -2,6 +2,8 @@
 
 The files in this project show you how to create a simple GraphQL server and progressively add more functionality.
 
+Slides are in the docs directory.
+
 ## Getting Started with index.js
 
 This is the most basic example demonstrating how to setup a GraphQL server with one query.
